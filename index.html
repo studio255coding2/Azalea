@@ -1,4 +1,4 @@
-<html>Math.sqrt(totalCubes)
+<html>
   <head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script></head>
   <body>
     <script src="./three.js-dev/build/three.js"></script>
@@ -7,7 +7,8 @@
 var scene = new THREE.Scene(); //created a three.js scene
 
 var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000) //create a camera
-camera.position.z = 5;
+camera.position.z = 25;
+camera.position.y = 5;
  
 var renderer = new THREE.WebGLRenderer({antialias: true}); //create renderer
 renderer.setClearColor("darkgrey"); //essentially a background color
@@ -20,9 +21,9 @@ var totalCubes = 100;
       for(var j=0; j<Math.sqrt(totalCubes); j++){
         var geometry = new THREE.BoxGeometry(4, 4, 4)
         var material = new THREE.MeshLambertMaterial({color: "#FF00FF"})
-        var cubehotandcold = THREE.Mesh(geometry, material)
-        cubehotandcold.position.x  = i;
-        cubehotandcold.position.z = j;
+        var cubehotandcold = new THREE.Mesh(geometry, material)
+        cubehotandcold.position.x  = i*4;
+        cubehotandcold.position.z = j*4;
         scene.add(cubehotandcold)
     }
 }
