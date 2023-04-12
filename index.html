@@ -21,11 +21,30 @@ var totalCubes = 100;
       for(var j=0; j<Math.sqrt(totalCubes); j++){
         var geometry = new THREE.BoxGeometry(4, 4, 4)
         var material = new THREE.MeshLambertMaterial({color: "#FF00FF"})
-        var cubehotandcold = new THREE.Mesh(geometry, material)
-        cubehotandcold.position.x  = i*4;
-        cubehotandcold.position.z = j*4;
-        scene.add(cubehotandcold)
-    }
+        var nono = new THREE.Mesh(geometry, material)
+        nono.position.x  = i*4;
+        nono.position.z = j*4;
+        scene.add(nono)
+
+
+
+
+
+        var light = new THREE.PointLight(0xFFFFFF, 0.5 ,500)
+        light.position.set(0, 10, 0);
+        scene.add(light)
+        var redlight = new THREE.PointLight(0xFF0000, 0.5,500)
+        redlight.position.set(0, 10, 0);
+        scene.add(redlight)
+
+        render(
+
+        $(document.body).keydown(function(evt){
+        if(evt.KeyCode==38){
+          var direction = nw THREE.Vector3();
+          camera.getWorldDirection()
+             }
+        )
 }
 
 var render = function() {
