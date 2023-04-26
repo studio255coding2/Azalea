@@ -4,7 +4,7 @@
     <script src="./three.js-dev/build/three.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
     <script>
-
+function setup(){
 const wood = [
   "obsidian",
   10
@@ -31,6 +31,8 @@ document.body.appendChild(renderer.domElement); //creates a canvas with our rend
 var totalCubes = 100;
   for(var i=0; i<Math.sqrt(totalCubes); i++){
       for(var j=0; j<Math.sqrt(totalCubes); j++){
+        var r = (noise(i, j) * 300 ) + 1;
+        for(var width =0; width < r; width++)
         var geometry = new THREE.BoxGeometry(4, 4, 4)
         var material = new THREE.MeshLambertMaterial({color: "#FF00FF"})
         var nono = new THREE.Mesh(geometry, material)
@@ -97,7 +99,7 @@ document.body.onmousemove = function(evt) {
       this.camera.position.y-=1;
     }
   };
-
+}
     </script>
   </body>
 </html>
