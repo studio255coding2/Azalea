@@ -4,6 +4,18 @@
     <script src="./three.js-dev/build/three.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
     <script>
+
+const wood = [
+  "obsidian",
+  10
+]
+const stone = [
+  "black"
+]
+const grass = [
+    "white"
+  ]
+
 var scene = new THREE.Scene(); //created a three.js scene
 
 var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000) //create a camera
@@ -24,8 +36,7 @@ var totalCubes = 100;
         var nono = new THREE.Mesh(geometry, material)
         nono.position.x  = i*4;
         nono.position.z = j*4;
-        scene.add(nono)
-      }
+        scene.add(nono)      }
     }
 
 
