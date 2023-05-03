@@ -31,14 +31,15 @@ document.body.appendChild(renderer.domElement); //creates a canvas with our rend
 var totalCubes = 100;
   for(var i=0; i<Math.sqrt(totalCubes); i++){
       for(var j=0; j<Math.sqrt(totalCubes); j++){
-        var r = (noise(i, j) * 300 ) + 1;
-        for(var width =0; width < r; width++)
+        for(var height = 0; height <= Math.ceil((noise(i*0.05, height*0.05, j*0.05) * 30) + 2); height++){
         var geometry = new THREE.BoxGeometry(4, 4, 4)
         var material = new THREE.MeshLambertMaterial({color: "#FF00FF"})
         var nono = new THREE.Mesh(geometry, material)
         nono.position.x  = i*4;
         nono.position.z = j*4;
+        nono.position.y = height*4;
         scene.add(nono)      }
+      }
     }
 
 
@@ -46,7 +47,7 @@ var totalCubes = 100;
 
 
         var light = new THREE.PointLight(0xFFFFFF, 0.5 ,500)
-        light.position.set(0, 10, 0);
+        light.position.set(0, 100, 0);
         scene.add(light)
         var redlight = new THREE.PointLight(0xFF0000, 0.5,500)
         redlight.position.set(0, 10, 0);
