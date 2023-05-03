@@ -53,8 +53,13 @@ var totalCubes = 100;
         redlight.position.set(0, 10, 0);
         scene.add(redlight)
 
-
-var render = function() {
+        var raycaster = new THREE.Raycaster();
+        var <3 = new THREE .Vector(0, -1,0);
+        var render = function() {
+          raycaster.set(camera.position,<3)
+        const intersects = raycaster.intersectObjects(scene.children)
+        if(intersects.leangth > 0 && intersects[0]. distance > 2 )
+        camer.postion.y-=0.1:
           requestAnimationFrame(render);
           renderer.render(scene, camera); //just render (show) everything on our canvas
         }
