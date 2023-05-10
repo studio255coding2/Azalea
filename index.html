@@ -19,8 +19,8 @@ const grass = [
 var scene = new THREE.Scene(); //created a three.js scene
 
 var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000) //create a camera
-camera.position.z = 25;
-camera.position.y = 5;
+camera.position.z = -25;
+camera.position.y = 55;
  
 var renderer = new THREE.WebGLRenderer({antialias: true}); //create renderer
 renderer.setClearColor("darkgrey"); //essentially a background color
@@ -54,12 +54,12 @@ var totalCubes = 100;
         scene.add(redlight)
 
         var raycaster = new THREE.Raycaster();
-        var <3 = new THREE .Vector(0, -1,0);
+        var heart = new THREE.Vector3(0, -1,0);
         var render = function() {
-          raycaster.set(camera.position,<3)
+          raycaster.set(camera.position,heart)
         const intersects = raycaster.intersectObjects(scene.children)
-        if(intersects.leangth > 0 && intersects[0]. distance > 2 )
-        camer.postion.y-=0.1:
+        if(intersects.length > 0 && intersects[0].distance > 2 ){
+        camera.position.y-=0.1;}
           requestAnimationFrame(render);
           renderer.render(scene, camera); //just render (show) everything on our canvas
         }
@@ -85,26 +85,55 @@ document.body.onmousemove = function(evt) {
     //if(Math.abs(camera.rotation.x)<1){camera.rotation.x-=evt.movementY/65;}else{camera.rotation.x-=(camera.rotation.x/Math.abs(camera.rotation.x))/100}
   };
 
-  document.body.onkeydown = function (evt) {
-    if(evt.keyCode==38||evt.keyCode==87) { //forwards
-      var direction = new THREE.Vector3();
-      camera.getWorldDirection( direction );
-      camera.position.add( direction );
-    }
-    if(evt.keyCode==40||evt.keyCode==83) { //backwards
-      var direction = new THREE.Vector3();
-      camera.getWorldDirection( direction );
-      camera.position.sub( direction );
-    }
-    if(evt.keyCode==32) { //jump
-      this.camera = camera;
-      this.camera.position.y+=1;
-    }
+  $(document.body).keydown(function (evt) {
+          if(evt.keyCode==87) { //forwards
+            camera.rotation.x=0;
+            var direction = new THREE.Vector3();
+            camera.getWorldDirection( direction );
+            raycaster.set(camera.position, direction);
+            const intersects = raycaster.intersectObjects(scene.children);
+            if(intersects.length>0) {
+              if(intersects[0].distance>3) {
+                camera.position.add( direction );
+              }
+            } else {
+              camera.position.add( direction );
+            }
+          }
+          if(evt.keyCode==83) { //backwards
+            camera.rotation.x=0;
+            var direction = new THREE.Vector3();
+            camera.getWorldDirection( direction );
+            raycaster.set(camera.position, direction.negate());
+            direction.negate()
+            const intersects = raycaster.intersectObjects(scene.children);
+            if(intersects.length>0) {
+              if(intersects[0].distance>3) {
+                camera.position.sub( direction );
+              }
+            } else {
+              camera.position.sub( direction );
+            }
+          }
+          if(evt.keyCode==32) { //jump
+            var downDirection = new THREE.Vector3( 0, -1, 0 )
+            raycaster.set(camera.position, downDirection);
+            const intersects = raycaster.intersectObjects(scene.children);
+            if(intersects.length>0) {
+              if(intersects[0].distance<3){
+                this.camera = camera;
+                this.camera.position.y+=1;
+              }
+            } else {
+              this.camera = camera;
+              this.camera.position.y+=1;
+            }
+          }
     if(evt.keyCode==17) { //go down //control key
       this.camera = camera;
       this.camera.position.y-=1;
     }
-  };
+  });
 }
     </script>
   </body>
