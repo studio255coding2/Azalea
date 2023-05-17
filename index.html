@@ -35,14 +35,14 @@
     <script>
 function setup(){
 const wood = [
-  "obsidian",
+  "brown",
   10
 ]
 const stone = [
-  "black"
+  "gray"
 ]
 const grass = [
-    "white"
+    "green"
   ]
 
 var scene = new THREE.Scene(); //created a three.js scene
@@ -57,7 +57,7 @@ renderer.setSize(window.innerWidth,window.innerHeight); //set renderer size to s
 
 document.body.appendChild(renderer.domElement); //creates a canvas with our render's specifications
 
-var totalCubes = 100;
+var totalCubes = 400;
   for(var i=0; i<Math.sqrt(totalCubes); i++){
       for(var j=0; j<Math.sqrt(totalCubes); j++){
         for(var height = 0; height <= Math.ceil((noise(i*0.05, height*0.05, j*0.05) * 30) + 2); height++){
@@ -88,7 +88,8 @@ var totalCubes = 100;
           raycaster.set(camera.position,heart)
         const intersects = raycaster.intersectObjects(scene.children)
         if(intersects.length > 0 && intersects[0].distance > 2 ){
-        camera.position.y-=0.1;}
+        //camera.position.y-=0.1;
+      }
           requestAnimationFrame(render);
           renderer.render(scene, camera); //just render (show) everything on our canvas
         }
@@ -182,6 +183,17 @@ document.addEventListener("click", function(evt){
             block.position.z = position.z+face.z;
             block.position.y = position.y+face.y;
             scene.add(block);
+    }
+  }
+  if(evt.button == 0){
+    var direction = new THREE.Vector3();
+    camera.getWorldDirection( direction );
+    raycaster.set(camera.position, direction);
+    const intersects = raycaster.intersectObjects(scene.children)
+    if(intersects.length > 0){
+      var face = intersects[0].object;
+      scene.remove(face)
+      
     }
   }
 })
